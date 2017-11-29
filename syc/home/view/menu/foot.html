@@ -1,0 +1,74 @@
+<div class="foot">
+    <div class="foot_big">
+        <div class="foot_one">
+            <div class="foot_one_top">
+                <div class="foot_one_top_left">
+                    <ul>
+                        <a href=""><li>免责条款</li></a>
+                        <a href=""><li>隐私保护</li></a>
+                        <a href=""><li>联系我们</li></a>
+                        <a href=""><li>关于我们</li></a>
+                        <a href=""><li>招商合作</li></a>
+                    </ul>
+                </div>
+                <!-- <a class="foot_ont_top_right" href="#a">返回顶部</a> -->
+            </div>
+            <div class="foot_one_mid">
+                <div class="foot_one_mid1">
+                    <div class="foot_one_mid1_one"><h4>客服中心</h4></div>
+                    <div class="foot_one_mid1_two">400-656-2300</div>
+                </div>
+                <div class="foot_one_mid2">
+                    <dl class="foot_one_mid2_chuci">
+                        <dt>初次购买</dt>
+                        <a href=""><dd>购物教程</dd></a>
+                        <a href=""><dd>问题总汇</dd></a>
+                    </dl>
+                    <dl class="foot_one_mid2_peisong">
+                        <dt>配送与支付</dt>
+                        <a href=""><dd>发货说明</dd></a>
+                        <a href=""><dd>智能查询</dd></a>
+                        <a href=""><dd>付款方式</dd></a>
+                    </dl>
+                    <dl class="foot_one_mid2_fuwu">
+                        <dt>服务保证</dt>
+                        <a href=""><dd>退换政策</dd></a>
+                        <a href=""><dd>售后服务</dd></a>
+                        <a href=""><dd>诚信保证</dd></a>
+                    </dl>
+                    <dl class="foot_one_mid2_xiangguan">
+                        <dt>相关资料</dt>
+                        <a href=""><dd>阿迪达斯</dd></a>
+                        <a href=""><dd>阿迪达斯三叶草</dd></a>
+                    </dl>
+                    <dl class="foot_one_mid2_lianxi">
+                        <dt>联系我们</dt>
+                        <a href=""><dd>投诉与建议</dd></a>
+                    </dl>
+                </div>
+            </div>
+            <div class="foot_one_bottom">
+                <div class="foot_one_bottom_left">
+                    <ul>
+                        <a href="javascript:void(0);"><li>友情链接:</li></a>
+                        {foreach $links as $v}
+                            <a href='{$v.linkname}' target="_blank"><li><img src='/public/link/{$v.linkpic}' width="16">{$v.name}</li></a>
+                        {/foreach}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="foot_two">
+            <marquee onMouseOut="this.start()"onMouseOver="this.stop()">
+                本网站仅供本人学习交流。不做任何商业用途。如有侵权，请联系本人予以删除。
+            </marquee>
+                <!-- <a href="" style="margin-left:549px;"><b>小键版三叶草官网</b></a>  &nbsp;<a href="http://www.miitbeian.gov.cn/" target="_blank">晋ICP备17006758号</a> -->
+        </div>
+    </div>
+    <div class="foot_bottom">
+        <center>
+            <img src="{:url('/public/static/home/images/foot_kexin.png','','')}" alt="可信网站">
+            <img src="{:url('/public/static/home/images/foot_anquan.png','','')}" alt="行业验证">
+        </center>
+    </div>
+</div>

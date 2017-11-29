@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>用户登录 - 三叶草官网</title>
+        <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/top.css','','')}">
+        <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/header.css','','')}">
+        <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/login.css','','')}">
+        <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/foot.css','','')}">
+        <script src="{:url('/public/static/home/js/jquery-1.8.3.min.js','','')}" type="text/javascript"></script>
+        <script type="text/javascript" src="{:url('/public/static/home/js/link.js','','')}"></script>
+        <script type="text/javascript" src="{:url('/public/static/home/js/head.js','','')}"></script>
+        <script type="text/javascript" src="{:url('/public/static/home/js/index.js','','')}"></script>
+    </head>
+    <body bgcolor="#F7F7F7">
+        <!-- top开始 head开始 -->
+        {include file="./syc/home/view/menu/top.html"/}
+        {include file="./syc/home/view/menu/head.html"/}
+        <!-- top结束 head结束 -->
+        <!-- 中间部分开始 -->
+        <div class="content">
+            <div class="content_mid">
+                <div class="content_left_one" id="jsjsjs">
+                    <ul>
+                        {foreach name="list" item="vo"}
+                        <div style="position: relative;float:left;">
+                            <a href="{:url('/home/lists/index',['id'=>$vo.id])}" onmouseover="show(this)" onmouseout="hide()">
+                                <li>{$vo.name}</li>
+                            </a>
+                            {if condition="$vo.0"}
+                            <div class="category">
+                                {foreach name="vo.0" item="v"}
+                                <a href="{:url('/home/lists/index',['id'=>$v.id])}">
+                                    <div class="category_con">
+                                        {$v.name}
+                                    </div>
+                                </a>
+                                {/foreach}
+                            </div>
+                            {/if}
+                        </div>
+                        {/foreach}
+                    </ul>
+                </div>
+                <div class="content_mid_center">
+                    <form action="{:url('/home/link/index1')}" method="post">
+                        <div class="content_mid_center1">
+                            <div class="content_mid_center1_top">
+                                <span class="content_mid_center1_topz">密码找回</span>
+                                <div class="content_mid_center1_topw"><strong>*</strong><span>为必填项</span></div>
+                            </div>
+                            <div class="content_mid_center1_name">
+                                <div class="content_mid_center1_name1">
+                                    <div class="content_mid_center1_name1_font">
+                                        <strong>*</strong> <span>用户名：</span>
+                                    </div>
+                                    <input type="text" name="username" id="username">
+                                </div>
+                            </div>
+                            <div class="content_mid_center1_code">
+                                <div class="content_mid_center1_code1">
+                                    <div class="content_mid_center1_code1_font">
+                                        <strong>*</strong> <span>验证码：</span>
+                                    </div>
+                                    <input type="text" name="code">
+                                    <img src="{:captcha_src()}" alt="captcha" onclick="this.src='{:captcha_src()}?seed='+Math.random()"/>
+                                </div>
+                            </div>
+                            <div class="content_mid_center1_reg">
+                                <input type="image" src="{:url('/public/static/home/images/btn_submit.gif','','')}" name="">
+                            </div>
+                            <div id="error"style="height: 20px; float: left; width: 200px; font-size: 14px; font-weight: 600; margin-left: 450px;color:red;">{$errorinfo|default=""}</div>
+                        </div>
+                    </form>
+                    <div class="content_mid_center2">
+                        <div class="content_mid_center2_top">注册新账号</div>
+                        <div class="content_mid_center2_font">
+                            注册成为三叶草会员，尽享专业和实惠的购物乐趣。
+                        </div>
+                        <div class="content_mid_center2_sub">
+                            <a href="{:url('/home/reg/index')}">
+                                <button>立即注册</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 中间部分结束 -->
+        <!-- foot开始 -->
+        {include file="./syc/home/view/menu/foot.html"/}
+        <!-- foot结束 -->
+    </body>
+</html>

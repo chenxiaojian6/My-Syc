@@ -1,0 +1,34 @@
+
+<div class="pageContent">
+	<form method="post" action="/admin/size/savesize/navTabId/goodslist/callbackType/closeCurrent"  class="pageForm required-validate"
+		onsubmit="return validateCallback(this,dialogAjaxDone);"><?php  //窗体组件采用这个 iframeCallback(this, navTabAjaxDone); ?>
+		<input type="hidden" name="gid" value="{$goods.id}">
+		<div class="pageFormContent" layoutH="60">
+			<h3>当前商品：【{$goods.goods}】的尺码信息</h3>
+			<br/><br/>
+			<dl>
+				<dt>尺码：</dt>
+				<dd>
+					<select name="sizeid" class="required">
+						<option>--请选择--</option>
+						{foreach $sizelist as $v}
+						<option value="{$v.id}" class="required" >{$v.name}</option>
+						{/foreach}
+					</select>
+				</dd>
+			</dl>
+			<dl>
+				<dt>库存：</dt>
+				<dd><input type="text" class="required" style="width:100%" name="store"/></dd><br/><br/><br/>
+			</dl>
+		</div>
+		
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>
+

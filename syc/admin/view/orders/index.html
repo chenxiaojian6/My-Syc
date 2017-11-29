@@ -1,0 +1,110 @@
+<form id="pagerForm" action="/admin/orders/index" method="post">
+	<input type="hidden" name="pageNum" value="{$currentPage}" />
+	<input type="hidden" name="numPerPage" value="{$numPerPage}" /><!--每页显示多少条-->
+	<input type="hidden" name="_order" value="{$Think.request._order}"/>
+	<input type="hidden" name="_sort" value="{$Think.request._sort}"/>
+</form>
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" method="post">
+	<input type="hidden" name="numPerPage" value="{$numPerPage}" /><!--每页显示多少条-->
+	<div class="searchBar">
+		<table class="searchContent">
+			<tr>
+				<td>
+					<b>搜索</b> &nbsp; 订单号：<input type="text" name="orderid" value="{$Think.post.orderid}" />
+				</td>
+				<td>
+					<div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="icon"  href="javascript:navTabPageBreak()"><span>刷新</span></a></li>
+			<!--<li><a class="icon" href="demo/common/dwz-team.xls" target="dwzExport" targetType="navTab" title="实要导出这些记录吗?"><span>导出EXCEL</span></a></li>-->
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="112">
+		<thead>
+			<tr align="center">
+				<th width="40">ID</th>
+				<th width="100">订单号</th>
+				<th width="150">联系人</th>
+				<th width="150">邮编</th>
+				<th width="150">电话</th>
+				<th width="300">地址</th>
+				<th width="100">购买时间</th>
+				<th width="100">总金额</th>
+				<th width="100">状态</th>
+				<th width="150">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			{volist name="list" id="vo"}
+				<tr target="item_id" rel="{$vo.id}" align="center">
+					<td>{$vo.id}</td>
+					<td width="200">{$vo.orderid}</td>
+					<td width="150">{$vo.linkman}</td>
+					<td width="150">{$vo.code}</td>
+					<td width="150">{$vo.phone}</td>
+					<td width="300">{$vo.address}</td>
+					<td width="100">{$vo.addtime|date='Y-m-d',###}</td>
+					<td width="100">{$vo.total}</td>
+					{if condition="$vo.status eq 1"}
+						<td id="oid{$vo.id}">新订单</td>
+						<td><button  onclick="fa({$vo.id})" id="sid{$vo.id}">发货</button></td>
+					{elseif condition="$vo.status eq 2"/}
+						<td>已发货</td>
+						<td><button disabled="disabled">已发货</button></td>
+					{elseif condition="$vo.status eq 3"/}
+						<td>已收货</td>
+						<td><button disabled="disabled">已收货</button></td>
+					{else/}
+						<td>无效订单</td>
+						<td><button disabled="disabled">无效订单</button></td>
+					{/if}
+				</tr>
+			{/volist}
+		</tbody>
+	</table>
+	<div class="panelBar">
+		<div class="pages">
+			<span>显示</span>
+			<select class="combox" name="numPerPage" onchange="navTabPageBreak({$Think.config.template.tpl_begin}numPerPage:this.value{$Think.config.template.tpl_end})">
+				<option value="5" {if condition="$numPerPage eq 5"}selected{/if}>5</option>
+				<option value="10" {if condition="$numPerPage eq 10"}selected{/if}>10</option>
+				<option value="15" {if condition="$numPerPage eq 15"}selected{/if}>15</option>
+				<option value="20" {if condition="$numPerPage eq 20"}selected{/if}>20</option>
+				<option value="25" {if condition="$numPerPage eq 25"}selected{/if}>25</option>
+				<option value="30" {if condition="$numPerPage eq 30"}selected{/if}>30</option>
+			</select>
+			<span>共{$totalCount}条</span>
+		</div>
+		<div class="pagination" targetType="navTab" totalCount="{$totalCount}" numPerPage="{$numPerPage}" pageNumShown="" currentPage="{$currentPage}"></div>
+	</div>
+</div>
+<script>
+	function fa(a) {
+	    //alert(a);
+        $.ajax({
+			url:"/admin/orders/send",
+			type:"post",
+			data:{id:a},
+			//async:false,
+			success:function(data){
+				if(data==true){
+				    $("#oid"+a).html("已发货");
+				    $("#sid"+a).html("已发货");
+                    $("#sid"+a).attr("disabled",true);
+				}
+			},
+			error:function () {
+				alert("ajax发送失败!");
+            }
+        })
+    }
+</script>

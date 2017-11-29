@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>详情页 - 三叶草官网</title>
+    <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/top.css','','')}">
+    <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/header.css','','')}">
+    <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/detail.css','','')}">
+    <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/foot.css','','')}">
+    <script src="{:url('/public/static/home/js/jquery-1.8.3.min.js','','')}" type="text/javascript"></script>
+    <script src="{:url('/public/static/home/js/detail.js','','')}" type="text/javascript"></script>
+    <script type="text/javascript" src="{:url('/public/static/home/js/head.js','','')}"></script>
+    <script type="text/javascript" src="{:url('/public/static/home/js/index.js','','')}"></script>
+</head>
+<body bgcolor="#F7F7F7">
+	<!-- top开始 head开始 -->
+    {include file="./syc/home/view/menu/top.html"/}
+    {include file="./syc/home/view/menu/head.html"/}
+    <!-- top结束 head结束 -->
+    <!-- 中间部分开始 -->
+    <input type="hidden" id="id" value="{$id}">
+    <div class="content">
+    	<div class="content_mid">
+    		<div class="content_mid_top">
+    			当前位置: <a href="/syc/home/index/">首页</a> > <a href="#">详情页</a>
+    		</div>
+            <div class="content_mid_left">
+                <div class="content_left_one" id="jsjsjs">
+                    <ul>
+                        {foreach name="list" item="vo"}
+                        <div style="position: relative;float:left;">
+                            <a href="/list/{$vo.id}.html" onmouseover="show(this)" onmouseout="hide()">
+                                <li>{$vo.name}</li>
+                            </a>
+                            {if condition="$vo.0"}
+                            <div class="category">
+                                {foreach name="vo.0" item="v"}
+                                <a href="/list/{$v.id}.html">
+                                    <div class="category_con">
+                                        {$v.name}
+                                    </div>
+                                </a>
+                                {/foreach}
+                            </div>
+                            {/if}
+                        </div>
+                        {/foreach}
+                    </ul>
+                </div>
+                <div class="content_mid_left_top">
+                    <ul>
+                    {foreach name="tlist" item="v"}
+                        <a href="/list/{$v.id}.html"><li>{$v.name}</li></a>
+                    {/foreach}
+                    </ul>
+                </div>
+                <!-- <div class="content_mid_left_bottom">
+                    <div class="content_mid_left_bottom_one">
+                        <span>浏览历史</span>
+                        <span class="content_mid_left_bottom_one_clear"><a href="action.php?a=clear_history">清除</a></span>
+                    </div>
+                            <div class='content_mid_left_bottom_two'>
+                                <div class='xiangqing_content'>
+                                    <a href='/syc/home/detail/index.php' title=''>
+                                        <div class='xiangqing_content_img'>
+                                            <img src='/syc/public/uploads/".picname."' width='50'>
+                                        </div>
+                                    </a>
+                                    <div class='xiangqing_content_content'>
+                                        <a href='/syc/home/detail/index.php'><p>"goods"</p></a>
+                                        <span>￥"price"</span>
+                                    </div>
+                                </div>
+                            </div>
+                    <div class="content_mid_left_bottom_three"></div>
+                </div> -->
+            </div>
+            <div class="content_mid_right">
+                <div class="content_mid_right_top">
+                    <div class="content_mid_right_top_font">
+                        {$glist.goods}
+                    </div>
+                    <div class="content_mid_right_img">
+                        <img src="/public/uploads/{$glist.picname1}" width="320" height="320">
+                    </div>
+                    <div class="content_mid_right_describe">
+                        <div class="content_mid_right_describe_pri">
+                            特惠价：<span>{$glist.price}</span>
+                        </div>
+                        <div class="content_mid_right_describe_pri2">
+                            市场价：<del>￥{$price}</del> <span>(9折)</span>
+                        </div>
+                        <div class="content_mid_right_describe_mid">
+                            <div class="content_mid_right_describe_mid_size">
+                                <dl>
+                                    <dt>尺码 :</dt>
+                                    <dd>
+                                    {foreach $lists as $vo}
+                                        <button onclick="fun(this)" class="bt" {if condition="$vo.store == 0"}disabled{/if}>{$vo.name}</button>
+                                    {/foreach}
+                                    </dd>
+                                </dl>
+                            </div>
+                            <div class='content_mid_right_describe_mid_store'>
+                            库存 : <span id="store">{$glist.store}</span>
+                            </div>
+                            <div class='content_mid_right_describe_mid_num'>
+                                购买数量 :
+                                <img src="{:url('/public/static/home/images/detail_jian.gif','','')}" onclick='jian()'>
+                                <input type='text' id='num' name='num' value="1" disabled>
+                                <input type='hidden' id='gid' value="{$glist.id}">
+                                <img src="{:url('/public/static/home/images/detail_jia.gif','','')}" onclick='jia()'>
+                            </div>
+                            {if condition="$glist.store > 0"}
+                            <div class='content_mid_right_describe_mid_order' onclick="buy()">
+                                <button>立即购买</button>
+                            </div>
+                            <div class='content_mid_right_describe_mid_addcar' onclick="submit({$glist.id})">
+                                <input type='image' src="{:url('/public/static/home/images/detail_car1.gif','','')}">
+                            </div>
+                            {else/}
+                            <div class='content_mid_right_describe_mid_addcar2'>
+                                已售完
+                            </div>
+                            {/if}
+                        </div>
+                        <div class="content_mid_right_recommend">
+                            <div class="content_mid_right_recommend_top">
+                                <span>推荐有礼</span>
+                                <div class="content_mid_right_recommend_top1">
+                                    <img src="{:url('/public/static/home/images/detail_tuijian.gif','','')}" alt="">
+                                    <span>推荐</span>
+                                </div>
+                                <a href="/add_collect/{$glist.id}.html" title="">
+                                    <div class="content_mid_right_recommend_top1">
+                                        <img src="{:url('/public/static/home/images/detail_xihuan.gif','','')}" alt="">
+                                        <span>收藏</span>
+                                    </div>
+                                </a>
+                                <a href=""><span class="wangyekefu">网页客服</span></a>
+                                <div class="dong">
+                                    <img src="{:url('/public/static/home/images/detail_dongtai.gif','','')}" alt="">
+                                </div>
+                            </div>
+                            <div class="content_mid_right_recommend_bottom">
+                                <ul>
+                                    <li><img src="{:url('/public/static/home/images/detail_kongjian.gif','','')}" alt=""></li>
+                                    <li><img src="{:url('/public/static/home/images/detail_weibo.gif','','')}" alt=""></li>
+                                    <li><img src="{:url('/public/static/home/images/detail_weibo2.gif','','')}" alt=""></li>
+                                    <li><img src="{:url('/public/static/home/images/detail_ren.gif','','')}" alt=""></li>
+                                    <li><img src="{:url('/public/static/home/images/detail_weibo3.gif','','')}" alt=""></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content_mid_right_bottom">
+                    <div class="content_mid_right_bottom_hd">
+                        <div class="content_mid_right_bottom_hd1"> 商品描述 </div>
+                    </div>
+                    <div class="content_mid_right_bottom_font">
+                        NEW YORK
+                    </div>
+                    <div class="content_mid_right_bottom_img">
+                        <img src="/public/uploads/{$glist.picname2}" width="950">
+                        <img src="/public/uploads/{$glist.picname3}" width="950">
+                    </div>
+                </div>
+                <div class="content_mid_right_bottom_comment">
+                    <div class="content_mid_right_bottom_hd">
+                        <div class="content_mid_right_bottom_hd1"> 商品评论 </div>
+                    </div>
+                            <div class='content_mid_right_bottom_comment1'>
+                                {foreach $comment as $v}
+                                <div class='comment'>
+                                    <div class='comment_info'>
+                                        <img src='/public/headpic/{$v.headpic}' width='60'>
+                                        <span>{$v.username}</span>
+                                    </div>
+                                    <div class='comment_info1'>
+                                        <div class='comment_info1_1'>
+                                            <span>客户评论 : {$v.comment}</span><br/>
+                                            <span class="comment_info1_1_img">
+                                                {if condition="$v.picname1"}
+                                                    <img src='/public/comment/{$v.picname1}' width='100' height='100'>
+                                                {/if}
+                                                {if condition="$v.picname2"}
+                                                    <img src='/public/comment/{$v.picname2}' width='100' height='100'>
+                                                {/if}
+                                                {if condition="$v.picname3"}
+                                                    <img src='/public/comment/{$v.picname3}' width='100' height='100'>
+                                                {/if}
+                                            </span>
+                                        </div>
+                                        <div class='comment_info1_1_time'>
+                                            {$v.addtime1|date="Y-m-d H:i:s",###}
+                                        </div>
+                                        <div class='comment_info1_2'>
+                                            <span>商家回复 :
+                                                {if condition="$v.reply"}
+                                                    {$v.reply}
+                                                {else/}
+                                                    商家暂无回复!
+                                                {/if}
+                                            </span>
+                                        </div>
+                                        <div class='comment_info1_2_time'>
+                                            {if condition="$v.addtime2"}
+                                                {$v.addtime2|date="Y-m-d H:i:s",###}
+                                            {/if}
+                                         </div>
+                                    </div>
+                                </div>
+                                {/foreach}
+                            </div>
+                </div>
+            </div>
+    	</div>
+    </div>
+    <!-- 中间部分结束 -->
+    <!-- foot开始 -->
+    {include file="./syc/home/view/menu/foot.html"/}
+    <!-- foot结束 -->
+</body>
+</html>

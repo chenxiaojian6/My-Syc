@@ -1,0 +1,355 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>三叶草 - 阿迪达斯三叶草 - 三叶草官网</title>
+    <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/top.css','','')}">
+    <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/header2.css','','')}">
+    <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/index.css','','')}">
+    <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/zzsc.css','','')}">
+    <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/style.css','','')}">
+    <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/foot.css','','')}">
+    <script src="{:url('/public/static/home/js/jquery-1.8.3.min.js','','')}" type="text/javascript"></script>
+    <script type="text/javascript" src="{:url('/public/static/home/js/index.js','','')}"></script>
+    <script type="text/javascript" src="{:url('/public/static/home/js/unslider.min.js','','')}"></script>
+    <script type="text/javascript" src="{:url('/public/static/home/js/zzsc.js','','')}"></script>
+        <style>
+            .banner { position: relative; overflow: auto; text-align: center;}
+            .banner li { list-style: none; }
+            .banner ul li { float: left; }
+            #b04 { width: 640px;}
+            #b04 .dots { position: absolute; left: 0; right: 0; bottom: 10px;}
+            #b04 .dots li{
+                display: inline-block;
+                width: 10px;
+                height: 10px;
+                margin: 0 4px;
+                text-indent: -999em;
+                border: 2px solid #fff;
+                border-radius: 6px;
+                cursor: pointer;
+                opacity: .4;
+                -webkit-transition: background .5s, opacity .5s;
+                -moz-transition: background .5s, opacity .5s;
+                transition: background .5s, opacity .5s;
+            }
+            #b04 .dots li.active{ background: #fff;opacity: 1;}
+            #b04 .arrow { position: absolute; top: 100px;}
+            #b04 #al { left: 15px;}
+            #b04 #ar { right: 15px;}
+        </style>
+        <script>
+            window._bd_share_config = {
+                slide : [{
+                    bdImg : 0,
+                    bdPos : "right",
+                    bdTop : 100
+                }]
+            }
+            with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+</head>
+<body bgcolor="#F7F7F7">
+<!-- top开始 head开始 -->
+{include file="./syc/home/view/menu/top.html"/}
+{include file="./syc/home/view/menu/head2.html"/}
+<!-- top结束 head结束 -->
+<!-- 中间部分开始 -->
+<div class="content">
+    <div class="content_big">
+        <!-- 中间部分左开始 -->
+        <div class="content_left">
+            <div class="content_left_one" id="did">
+                <ul>
+                    {foreach name="list" item="vo"}
+                        <div style="position: relative;float:left;">
+                            <a href="/list/{$vo.id}.html" onmouseover="show(this)" onmouseout="hide()">
+                                <li>{$vo.name}</li>
+                            </a>
+                            {if condition="$vo.0"}
+                                <div class="category">
+                                    {foreach name="vo.0" item="v"}
+                                    <a href="/list/{$v.id}.html">
+                                        <div class="category_con">
+                                            {$v.name}
+                                        </div>
+                                    </a>
+                                    {/foreach}
+                                </div>
+                            {/if}
+                        </div>
+                    {/foreach}
+                </ul>
+            </div>
+            <div class="content_left_xinkuan">
+                <div class="content_left_xinkuan_one">
+                    新款上市
+                </div>
+                {foreach name="new" item="vo"}
+                    <div class="content_left_xinkuan_two">
+                        <div class="xinkuan_content">
+                            <a href="/detail/{$vo.id}.html">
+                                <div class="xinkuan_content_img">
+                                    <img src="/public/uploads/{$vo.picname1}" width="50" height="50">
+                                </div>
+                            </a>
+                            <div class="xinkuan_content_content">
+                                <a href="/detail/{$vo.id}.html"><p>{$vo.goods}</p></a>
+                                <span>￥{$vo.price}</span>
+                            </div>
+                        </div>
+                    </div>
+                {/foreach}
+                <div class="content_left_xinkuan_three"></div>
+            </div>
+            <div class="content_left_remen">
+                <div class="content_left_remen_one">
+                    热销排行
+                </div>
+                    {foreach name="hot" item="vo"}
+                    <div class="content_left_xinkuan_two">
+                        <div class="xinkuan_content">
+                            <a href="/detail/{$vo.id}.html">
+                                <div class="xinkuan_content_img">
+                                    <img src="/public/uploads/{$vo.picname1}" width="50" height="50">
+                                </div>
+                            </a>
+                            <div class="xinkuan_content_content">
+                                <a href="/detail/{$vo.id}.html"><p>{$vo.goods}</p></a>
+                                <span>￥{$vo.price}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {/foreach}
+                <div class="content_left_remen_three"></div>
+            </div>
+        </div>
+<!-- 中间部分左结束 -->
+<!-- 中间部分中开始 -->
+        <div class="content_mid">
+            <div class="content_mid_top">
+                <!-- <img src="{:url('/public/static/home/images/carousel_1.jpg','','')}" id="mid" alt=""> -->
+                <div class="banner" id="b04">
+                    <ul>
+                        <li><img src="{:url('/public/static/home/images/carousel_1.jpg','','')}" width="735" height="235" ></li>
+                        <li><img src="{:url('/public/static/home/images/carousel_2.jpg','','')}" width="735" height="235" ></li>
+                        <li><img src="{:url('/public/static/home/images/carousel_3.jpg','','')}" width="735" height="235" ></li>
+                        <li><img src="{:url('/public/static/home/images/carousel_4.jpg','','')}" width="735" height="235" ></li>
+                    </ul>
+                    <a href="javascript:void(0);" class="unslider-arrow04 prev"><img class="arrow" id="al" src="{:url('/public/static/home/images/arrowl.png','','')}" alt="prev" width="20" height="35"></a>
+                    <a href="javascript:void(0);" class="unslider-arrow04 next"><img class="arrow" id="ar" src="{:url('/public/static/home/images/arrowr.png','','')}" alt="next" width="20" height="37"></a>
+                </div>
+            </div>
+            <div class="content_mid_mid">
+                <div class="content_mid_mid_hd">
+                    <div class="content_mid_mid_hd1">
+                        鞋款推荐
+                    </div>
+                </div>
+                <div class="content_mid_mid_con">
+                    {foreach name="shoe" item="vo"}
+                    <div class='content_mid_mid_content'>
+                        <a href="/detail/{$vo.id}.html">
+                            <div class='content_mid_mid_img'>
+                                <img src='/public/uploads/{$vo.picname1}' width='120' height='120'>
+                            </div>
+                        </a>
+                        <div class='content_mid_mid_xin'>新品</div>
+                        <div class='content_mid_mid_font'>
+                            <a href="/detail/{$vo.id}.html">
+                            <div class='content_mid_mid_font_1'>
+                                {$vo.goods}
+                            </div>
+                            </a>
+                            <div class='content_mid_mid_font_2'>
+                                ￥{$vo.price}
+                            </div>
+                        </div>
+                    </div>
+                    {/foreach}
+                </div>
+            </div>
+            <div class="content_mid_img">
+                <img src="{:url('/public/static/home/images/chunjixinkuan.jpg','','')}">
+            </div>
+            <div class="content_mid_yifu">
+                <div class="content_mid_yifu_hd">
+                    <div class="content_mid_yifu_hd1">
+                        衣服推荐
+                    </div>
+                </div>
+                <div class="content_mid_yifu_con">
+                    {foreach name="clo" item="vo"}
+                    <div class='content_mid_mid_content'>
+                        <a href="/detail/{$vo.id}.html">
+                            <div class='content_mid_mid_img'>
+                                <img src='/public/uploads/{$vo.picname1}' width='120' height='120'>
+                            </div>
+                        </a>
+                        <div class='content_mid_mid_xin'>新品</div>
+                        <div class='content_mid_mid_font'>
+                            <a href="/detail/{$vo.id}.html">
+                                <div class='content_mid_mid_font_1'>
+                                    {$vo.goods}
+                                </div>
+                            </a>
+                            <div class='content_mid_mid_font_2'>
+                                ￥{$vo.price}
+                            </div>
+                        </div>
+                    </div>
+                    {/foreach}
+                </div>
+            </div>
+
+            <div class="content_mid_gengduo">
+                <div class="content_mid_gengduo_hd">
+                    <div class="content_mid_gengduo_hd1" onmouseover="mou(this)" id="77">
+                        手表
+                    </div>
+                    <div class="content_mid_gengduo_hd1" onmouseover="mou(this)" id="79">
+                        帽子
+                    </div>
+                    <div class="content_mid_gengduo_hd1" onmouseover="mou(this)" id="75">
+                        包包
+                    </div>
+                </div>
+                <div class="content_mid_gengduo_con" id="body">
+                    {foreach name="watch" item="vo"}
+                    <div class='content_mid_mid_content'>
+                        <a href="/detail/{$vo.id}.html">
+                            <div class='content_mid_mid_img'>
+                                <img src='/public/uploads/{$vo.picname1}' width='120' height='120'>
+                            </div>
+                        </a>
+                        <div class='content_mid_mid_xin'>新品</div>
+                        <div class='content_mid_mid_font'>
+                            <a href="/detail/{$vo.id}.html">
+                                <div class='content_mid_mid_font_1'>
+                                    {$vo.goods}
+                                </div>
+                            </a>
+                            <div class='content_mid_mid_font_2'>
+                                ￥{$vo.price}
+                            </div>
+                        </div>
+                    </div>
+                    {/foreach}
+                </div>
+            </div>
+        </div>
+<!-- 中间部分中结束 -->
+<!-- 中间部分右开始 -->
+        <div class="content_right">
+            <div class="content_right_one">
+                <div class="content_right_one_zuixin">
+                    最新文章
+                </div>
+                <div class="content_right_one_cont">
+                    <div class="content_right_one_cont1">
+                        <a href="" title="">Adidas Originals 春夏系列</a>
+                    </div>
+                    <div class="content_right_one_cont1">
+                        <a href="" title="">活出自我，女子系列春款上市</a>
+                    </div>
+                    <div class="content_right_one_cont1">
+                        <a href="" title="">Superstar明星款春季上新</a>
+                    </div>
+                    <div class="content_left_xinkuan_three"></div>
+                </div>
+            </div>
+            <div class="content_right_img">
+                <img src="{:url('/public/static/home/images/right_sup.jpg','','')}" alt="">
+            </div>
+            <div class="content_right_star">
+                <div class="content_right_star_daiyan">
+                    代言明星
+                </div>
+                <div class="content_right_star_img">
+                    <div class="content_right_star_img1">
+                        <img src="{:url('/public/static/home/images/wuyifan.jpg','','')}" width="140"alt="">
+                    </div>
+                    <div class="content_right_star_img2">
+                        <img src="{:url('/public/static/home/images/fanbingbing.jpg','','')}" width="140"alt="">
+                    </div>
+                    <div class="content_right_star_img3">
+                        <img src="{:url('/public/static/home/images/chenyixun.jpg','','')}" width="140"alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="s-index-side" style="float:left">
+                <div class="title">
+                    <h3>排行榜 Top10</h3>
+                </div>
+                <ul class="weekly-list cls">
+                    {foreach name="rank" item="vo"}
+                        <li>
+                            <div class="app-show-title">
+                                <a href="/detail/{$vo.id}.html" style="width:193px;overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{$vo.goods}</a>
+                            </div>
+                            <div class="app-show-block">
+                                <a href="/detail/{$vo.id}.html" class="pic"><img src="/public/uploads/{$vo.picname1}"></a>
+                            </div>
+                        </li>
+                    {/foreach}
+                </ul>
+            </div>
+        </div>
+<!-- 中间部分右结束 -->
+    </div>
+</div>
+    <a href="#" class="cd-top">Top</a>
+
+<!-- 中间部分结束 -->
+<!-- foot开始 -->
+{include file="./syc/home/view/menu/foot.html"/}
+<!-- foot结束 -->
+<script type="text/javascript">
+    $(function(){
+        var unslider04 = $('#b04').unslider({
+            dots: true
+        }),
+        data04 = unslider04.data('unslider');
+        $('.unslider-arrow04').click(function() {
+            var fn = this.className.split(' ')[1];
+            data04[fn]();
+        });
+        $(".weekly-list li").bind("mouseenter",weekly_ani).bind("mouseleave",function(){
+            clearTimeout(
+                $(this).data("setTime")
+            );
+        });
+        function weekly_ani(e){
+            var me=$(e.target).closest("li");
+            if(me.hasClass("current")) 
+            return;
+            var orili=me.parent().find(".current");
+            $(this).data("setTime",setTimeout(function(){
+                weekly_move(me,orili,100,39)
+            },150));
+        }
+        function weekly_move(me,orili,h,h2){
+            me.addClass("current");
+            $(".weekly-list li").unbind("mouseenter",weekly_ani);
+            setTimeout(function(){
+                var cur_h=me.height();
+                if(cur_h < h-2){
+                    var cur_orih=orili.height();
+                    var dh=Math.round((h-cur_h)/2.5);
+                    me.css("height",cur_h+dh);
+                    orili.css("height",cur_orih-dh);
+                    setTimeout(arguments.callee,25);
+                }else{
+                    me.addClass("current").css("height",h);
+                    orili.css("height",h2);
+                    $(".weekly-list li").bind("mouseenter",weekly_ani);
+                    orili.removeClass("current");
+                }
+            },25);
+        }
+        $(".weekly-list").find("li:first").addClass("current").animate({height:100}, 300);
+    });
+</script>
+</body>
+</html>

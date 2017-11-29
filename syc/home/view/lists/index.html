@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>列表页 - 三叶草官网</title>
+    <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/top.css','','')}">
+    <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/header.css','','')}">
+    <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/list.css','','')}">
+    <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/foot.css','','')}">
+    <script src="{:url('/public/static/home/js/jquery-1.8.3.min.js','','')}" type="text/javascript"></script>
+    <script type="text/javascript" src="{:url('/public/static/home/js/head.js','','')}"></script>
+    <script type="text/javascript" src="{:url('/public/static/home/js/index.js','','')}"></script>
+    <script type="text/javascript" src="{:url('/public/static/home/js/list.js','','')}"></script>
+</head>
+<body bgcolor="#F7F7F7">
+	<!-- top开始 head开始 -->
+    {include file="./syc/home/view/menu/top.html"/}
+    {include file="./syc/home/view/menu/head.html"/}
+    <!-- top结束 head结束 -->
+    <!-- 中间部分开始 -->
+    <div class="content">
+    	<div class="content_mid">
+            <div class="content_left_one" id="jsjsjs">
+                <ul>
+                    {foreach name="list" item="vo"}
+                        <div style="position: relative;float:left;">
+                            <a href="/list/{$vo.id}.html" onmouseover="show(this)" onmouseout="hide()">
+                                <li>{$vo.name}</li>
+                            </a>
+                            <div class="category">
+                                {foreach name="vo.0" item="v"}
+                                <a href="/list/{$v.id}.html">
+                                    <div class="category_con">
+                                        {$v.name}
+                                    </div>
+                                </a>
+                                {/foreach}
+                            </div>
+                        </div>
+                    {/foreach}
+                </ul>
+            </div>
+    		<div class="content_mid_top">
+    		    当前位置: <a href="{:url('/index')}">首页</a> > {$name}
+    		</div>
+    		<div class="content_mid_mid">
+    			<div class="content_mid_mid_left">
+    				<div class="content_mid_mid_left_top">
+    					<div class="content_mid_mid_left_top1">
+                            {$typename}
+                        </div>
+    					<div class="content_mid_mid_left_top2">
+    						<ul>
+                                {foreach name="types" item="vo"}
+                                    <a href="/list/{$vo.id}.html"><li>{$vo.name}</li></a>
+                                {/foreach}
+    						</ul>
+    					</div>
+    					<div class="content_mid_mid_left_top3"></div>
+    				</div>
+    				<div class="content_mid_mid_left_bottom">
+    					<div class="content_mid_mid_left_bottom_one">
+							{$typename}销售排行
+						</div>
+						{foreach name="sell" item="vo"}
+                            <div class="content_mid_mid_left_bottom_two">
+                                <div class="xiaoshou_content">
+                                    <a href="/detail/{$vo.id}.html" title="">
+                                        <div class="xiaoshou_content_img">
+                                            <img src="/public/uploads/{$vo.picname1}" width="50" height="50">
+                                        </div>
+                                    </a>
+                                    <div class="xiaoshou_content_content">
+                                        <a href="/detail/{$vo.id}.html"><p>{$vo.goods}</p></a>
+                                        <span>￥{$vo.price}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        {/foreach}
+    					<div class="content_mid_mid_left_bottom_three"></div>
+    				</div>
+    			</div>
+    			<div class="content_mid_mid_right">
+    				<div class="content_mid_mid_right1">
+                    {if condition="!$Think.get.goods"}
+    					<div class="content_mid_mid_right1_paixu">
+                            <span>排序 : </span>
+                            <ul>
+                                <input type="hidden" id="id" value="{$id|default=''}">
+                                <li onclick="sort(this)" id="addtime">新品</li>
+                                <li onclick="sort(this)" id="num">销量</li>
+                                <li onclick="sort(this)" id="price">价格</li>
+                            </ul>
+                        </div>
+                    {/if}
+    				</div>
+    				<div class="content_mid_mid_right2">
+    				    {foreach name="lists" item="vo"}
+                            <div class='content_mid_mid_right2_sp'>
+                                <div class='content_mid_mid_right2_sp_font'>
+                                    <a href="/detail/{$vo.id}.html">
+                                        {$vo.goods}
+                                    </a>
+                                </div>
+                                <div class='content_mid_mid_right2_sp_img'>
+                                    <a href="/detail/{$vo.id}.html">
+                                        <img src='/public/uploads/{$vo.picname1}' width="120" height="120">
+                                    </a>
+                                </div>
+                                <div class='content_mid_mid_right2_sp_price'>
+                                    ￥{$vo.price}
+                                </div>
+                                <div class='content_mid_mid_right2_sp_blue'>
+                                    新品
+                                </div>
+                            </div>
+                        {/foreach}
+    				</div>
+                    <div class="content_mid_mid_right3">
+                        <div class="content_mid_mid_right3_sub">
+                        </div>
+                    </div>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+    <!-- 中间部分结束 -->
+    <!-- foot开始 -->
+    {include file="./syc/home/view/menu/foot.html"/}
+    <!-- foot结束 -->
+</body>
+</html>

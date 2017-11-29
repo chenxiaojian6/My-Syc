@@ -1,0 +1,37 @@
+
+<div class="pageContent">
+	<form method="post" action="/admin/link/update/navTabId/linklist/callbackType/closeCurrent" enctype="multipart/form-data" class="pageForm required-validate"
+		onsubmit="return iframeCallback(this,dialogAjaxDone);"><?php  //窗体组件采用这个 iframeCallback(this, navTabAjaxDone); ?>
+		<input type="hidden" name="id" value="{$vo.id}">
+		<div class="pageFormContent" layoutH="60">
+			<dl>
+				<dt>链接名称：</dt>
+				<dd><input type="text" class="required"  style="width:100%" name="name" value="{$vo.name}"/></dd>
+			</dl>
+			<dl>
+				<dt>链接地址：</dt>
+				<dd><input type="text" class="required url"  style="width:100%" name="linkname" value="{$vo.linkname}"/></dd>
+			</dl>
+			<dl>
+				<dt>链接地址：</dt>
+				<dd><input type="text" class="required"  style="width:100%" name="linknum" value="{$vo.linknum}"/></dd>
+			</dl>
+			<dl>
+				<dt>图片：</dt>
+				<dd><img src="/public/link/{$vo.linkpic}" width="50"></dd>
+			</dl>
+			<dl>
+				<dt>新图片：</dt>
+				<dd><input type="file" name="linkpic"></dd>
+			</dl><br/><br/><br/>
+		</div>
+		
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>
+

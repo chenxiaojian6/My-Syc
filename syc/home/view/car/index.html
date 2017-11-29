@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>购物车 - 三叶草官网</title>
+    <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/top.css','','')}">
+    <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/header.css','','')}">
+    <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/car.css','','')}">
+    <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/foot.css','','')}">
+    <script src="{:url('/public/static/home/js/jquery-1.8.3.min.js','','')}" type="text/javascript"></script>
+    <script src="{:url('/public/static/home/js/car.js','','')}" type="text/javascript"></script>
+    <script type="text/javascript" src="{:url('/public/static/home/js/head.js','','')}"></script>
+    <script type="text/javascript" src="{:url('/public/static/home/js/index.js','','')}"></script>
+</head>
+<body bgcolor="#F7F7F7">
+    <!-- top开始 head开始 -->
+    {include file="./syc/home/view/menu/top.html"/}
+    {include file="./syc/home/view/menu/head.html"/}
+    <!-- top结束 head结束 -->
+    <!-- 中间部分开始 -->
+    <div style="display: none;">
+        <div class='content_mid_mid2'>
+            <span class='content_mid_mid2_top'>提示信息</span>
+            <div class='content_mid_mid2_con'>
+                <div class='content_mid_mid2_con_img'>
+                    <img src="{:url('/public/static/home/images/gwc_empty.jpg','','')}">
+                </div>
+                <div class='content_mid_mid2_con1'>
+                    您的购物车中没有商品！
+                </div>
+                <div class='content_mid_mid2_con2'>
+                    <a href="{:url('/index')}"><button>立即购物</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="content_mid">
+            <div class="content_left_one" id="jsjsjs">
+                <ul>
+                    {foreach name="list" item="vo"}
+                    <div style="position: relative;float:left;">
+                        <a href="/list/{$vo.id}.html" onmouseover="show(this)" onmouseout="hide()">
+                            <li>{$vo.name}</li>
+                        </a>
+                        {if condition="$vo.0"}
+                        <div class="category">
+                            {foreach name="vo.0" item="v"}
+                            <a href="/list/{$v.id}.html">
+                                <div class="category_con">
+                                    {$v.name}
+                                </div>
+                            </a>
+                            {/foreach}
+                        </div>
+                        {/if}
+                    </div>
+                    {/foreach}
+                </ul>
+            </div>
+            <div class="content_mid_top">
+                当前位置: 购物流程
+            </div>
+            {if condition="$carlist"}
+            <form method="post" action="{:url('/home/order/index')}">
+                <div class='content_mid_mid'>
+                    <span class='content_mid_mid_top'>核对购物车信息</span>
+                    <div class='content_mid_mid1'>
+                    <div class='content_mid_mid1_top'>
+                        购物者商品清单
+                    </div>
+                    {foreach $carlist as $vo}
+                        <div class='content_mid_mid1_con'>
+                            <div style="width:15px;height:15px;float:left;margin-top:27px;">
+                                <input type="checkbox" name="car[]" id="int{$vo.id}" value="{$vo.id}" title="{$vo.number}" >
+                            </div>
+                            <div class='content_mid_mid1_con_img'>
+                                <img src="/public/uploads/{$vo.picname1}" width="50">
+                            </div>
+                            <div class='content_mid_mid1_con_con'>
+                                <div class='content_mid_mid1_con_con_fon1'>
+                                    <a href=''>{$vo.goods}</a>
+                                </div>
+                                <div class='content_mid_mid1_con_con_fon2'>
+                                    尺码 : {$vo.size}
+                                </div>
+                            </div>
+                            <div class='content_mid_mid1_con_pri'>
+                                {$vo.price}元
+                            </div>
+                            <div class='content_mid_mid1_con_num'>
+                                <img class='img1' src="{:url('/public/static/home/images/detail_jian.gif','','')}" onclick="subtract({$vo.id})">
+                                <span id="single{$vo.id}">{$vo.number}</span>
+                                <img src="{:url('/public/static/home/images/detail_jia.gif','','')}" onclick="add({$vo.id})">
+                            </div>
+                            <div class='content_mid_mid1_con_pri2'>
+                                <span id="total{$vo.id}">{$vo.price*$vo.number}</span>元
+                            </div>
+                            <div class='content_mid_mid1_con_sub'>
+                                <a href="javascript:void(0);"  onclick="dodel(this,{$vo.id})">删除</a>
+                            </div>
+                        </div>
+                    {/foreach}
+                    <div class="checkall">
+                        <a class="check" href="javascript:void(0);">全选</a>
+                        <a class="check" href="javascript:void(0);">反选</a>
+                    </div>
+                    </div>
+                    <div class='content_mid_mid_bottom'>
+                        <span class='content_mid_mid_bottom1'>共 <span id="goodsnum">0</span> 件商品</span>
+                        <span class='content_mid_mid_bottom2'><a href="{:url('/index')}">继续购物</a></span>
+                        <span class='content_mid_mid_bottom2'><a href="javascript:clear();">清空购物</a></span>
+                        <div class='content_mid_mid_bottom3'>
+                            应付金额: ￥<span id="sum">0</span> 元
+                        </div>
+                        <a href="javascript:void(0);" onclick="submit()">
+                            <div class='content_mid_mid_sub'>
+                                提交订单
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </form>
+            {else/}
+                <div class='content_mid_mid2'>
+                    <span class='content_mid_mid2_top'>提示信息</span>
+                    <div class='content_mid_mid2_con'>
+                        <div class='content_mid_mid2_con_img'>
+                            <img src="{:url('/public/static/home/images/gwc_empty.jpg','','')}">
+                        </div>
+                        <div class='content_mid_mid2_con1'>
+                            您的购物车中没有商品！
+                        </div>
+                        <div class='content_mid_mid2_con2'>
+                            <a href="{:url('/index')}"><button>立即购物</button></a>
+                        </div>
+                    </div>
+                </div>
+            {/if}
+        </div>
+    </div>
+    <!-- 中间部分结束 -->
+    <!-- foot开始 -->
+    {include file="./syc/home/view/menu/foot.html"/}
+    <!-- foot结束 -->
+</body>
+</html>

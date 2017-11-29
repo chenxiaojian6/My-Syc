@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>用户登录 - 三叶草官网</title>
+        <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/top.css','','')}">
+        <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/header.css','','')}">
+        <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/login.css','','')}">
+        <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/foot.css','','')}">
+        <script src="{:url('/public/static/home/js/jquery-1.8.3.min.js','','')}" type="text/javascript"></script>
+        <script type="text/javascript" src="{:url('/public/static/home/js/login.js','','')}"></script>
+        <script type="text/javascript" src="{:url('/public/static/home/js/head.js','','')}"></script>
+        <script type="text/javascript" src="{:url('/public/static/home/js/index.js','','')}"></script>
+        <script src="http://static.geetest.com/static/tools/gt.js"></script>
+        <script>
+            var handler = function (captchaObj) {
+                // 将验证码加到id为captcha的元素里
+                captchaObj.appendTo("#captcha");
+             };
+            // 获取验证码
+            $.get("{:url('Home/Login/show')}", function(data) {
+                // 使用initGeetest接口
+                // 参数1：配置参数，与创建Geetest实例时接受的参数一致
+                // 参数2：回调，回调的第一个参数验证码对象，之后可以使用它做appendTo之类的事件
+                initGeetest({
+                    gt: data.gt,
+                    challenge: data.challenge,
+                    product: "float", // 产品形式
+                    offline: !data.success,
+                    width:'100px'
+                }, handler);
+            },'json');
+        </script>
+    </head>
+    <body bgcolor="#F7F7F7">
+        <!-- top开始 head开始 -->
+        {include file="./syc/home/view/menu/top.html"/}
+        {include file="./syc/home/view/menu/head.html"/}
+        <!-- top结束 head结束 -->
+        <!-- 中间部分开始 -->
+        <div class="content">
+            <div class="content_mid" style="height: 360px;">
+                <div class="content_left_one" id="jsjsjs">
+                    <ul>
+                        {foreach name="list" item="vo"}
+                        <div style="position: relative;float:left;">
+                            <a href="{:url('/home/lists/index',['id'=>$vo.id])}" onmouseover="show(this)" onmouseout="hide()">
+                                <li>{$vo.name}</li>
+                            </a>
+                            {if condition="$vo.0"}
+                            <div class="category">
+                                {foreach name="vo.0" item="v"}
+                                <a href="{:url('/home/lists/index',['id'=>$v.id])}">
+                                    <div class="category_con">
+                                        {$v.name}
+                                    </div>
+                                </a>
+                                {/foreach}
+                            </div>
+                            {/if}
+                        </div>
+                        {/foreach}
+                    </ul>
+                </div>
+                <div class="content_mid_center">
+                    <form action="{:url('/home/login/dologin')}" method="post">
+                        <div class="content_mid_center1">
+                            <div class="content_mid_center1_top">
+                                <span class="content_mid_center1_topz">用户登录</span>
+                                <div class="content_mid_center1_topw"><strong>*</strong><span>为必填项</span></div>
+                            </div>
+                            <div class="content_mid_center1_name">
+                                <div class="content_mid_center1_name1">
+                                    <div class="content_mid_center1_name1_font">
+                                        <strong>*</strong> <span>用户名：</span>
+                                    </div>
+                                    <input type="text" name="username" id="username">
+                                </div>
+                            </div>
+                            <div class="content_mid_center1_pass">
+                                <div class="content_mid_center1_pass1">
+                                    <div class="content_mid_center1_pass1_font">
+                                        <strong>*</strong> <span>密码：</span>
+                                    </div>
+                                    <input type="password" name="pass" id="pass">
+                                </div>
+                            </div>
+                            <div class="content_mid_center1_code">
+                                <div class="content_mid_center1_code1">
+                                    <div class="content_mid_center1_code1_font">
+                                        <strong>*</strong> <span>验证码：</span>
+                                    </div>
+                                    <div id="captcha" class="content_mid_center1_code1_font"></div>
+                                    <!-- <input type="text" name="code">
+                                    <img src="{:captcha_src()}" alt="captcha" onclick="this.src='{:captcha_src()}?seed='+Math.random()"/> -->
+                                </div>
+                            </div>
+                            <div style="margin-left: 185px;font-size: 13px;margin-top:23px;">
+                                <a href="{:url('home/link/index')}" style="color: #808080">忘记密码</a>
+                            </div>
+                            <div class="content_mid_center1_reg">
+                                <input type="image" src="{:url('/public/static/home/images/login.gif','','')}" name="">
+                            </div>
+                            <div id="error"style="height: 20px; float: left; width: 200px; font-size: 14px; font-weight: 600; margin-left: 450px;color:red;">{$errorinfo|default=""}</div>
+                            <ul class="content_mid_center_ul">
+                                <li>
+                                    <a href="{:url('home/login/qq')}">
+                                        <img src="{:url('/public/static/home/images/Qq.jpg','','')}" alt="QQ登录">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{:url('home/login/wb')}">
+                                        <img src="{:url('/public/static/home/images/Wb.jpg','','')}" alt="微博登录">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <img src="{:url('/public/static/home/images/Wx.jpg','','')}" alt="微信登录">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                    <div class="content_mid_center2">
+                        <div class="content_mid_center2_top">注册新账号</div>
+                        <div class="content_mid_center2_font">
+                            注册成为三叶草会员，尽享专业和实惠的购物乐趣。
+                        </div>
+                        <div class="content_mid_center2_sub">
+                            <a href="{:url('/reg')}">
+                                <button>立即注册</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 中间部分结束 -->
+        <!-- foot开始 -->
+        {include file="./syc/home/view/menu/foot.html"/}
+        <!-- foot结束 -->
+    </body>
+</html>

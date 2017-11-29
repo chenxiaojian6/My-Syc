@@ -1,0 +1,61 @@
+<div class="header">
+    <div class="header_one">
+        <div class="header_one_logo">
+            <a href="{:url('/index')}" title="">
+                <img src="{:url('/public/static/home/images/logo.png','','')}" alt="logo">
+            </a>
+        </div>
+        <div class="header_one_mid">
+            <div class="header_one_nav">
+                <ul>
+                    <a href="{:url('/index')}">
+                        <li class="header_one_nav_fon"><strong>首页</strong></li>
+                    </a>
+                    <a href="#">
+                        <li class="header_one_nav_font1"><strong>三叶草尺码</strong></li>
+                    </a>
+                    <a href="#">
+                        <li class="header_one_nav_font"><strong>十个理由</strong></li>
+                    </a>
+                    <a href="#">
+                        <li class="header_one_nav_font"><strong>热点资讯</strong></li>
+                    </a>
+                    <a href="#">
+                        <li class="header_one_nav_font1"><strong>三叶草论坛</strong></li>
+                    </a>
+                </ul>
+            </div>
+        </div>
+        <div class="header_one_time"><p>400-656-2300</p></div>
+        <div class="header_one_bottom">
+            <a href="">
+                <div class="header_one_bottom_one"><div class="header_one_bottom_one1" id="js">全部分类</div></div>
+            </a>
+            <div class="header_one_form">
+                <form action="{:url('/home/lists/index')}" method="get">
+                    <img src="{:url('/public/static/home/images/sousuo.gif','','')}" alt="">
+                    <input class="header_one_form_kuang" type="text" name="goods" value="{$Think.get.goods}">
+                    <input class="header_one_form_sub" type="image" src="{:url('/public/static/home/images/sousuo2.gif','','')}">
+                </form>
+            </div>
+            <a href="{:url('/car')}" title="">
+                <div class="header_one_gwc">
+                    <div class="header_one_gwc_1">
+                        <div class="header_one_gwc_2">您的购物车有 <span id="carnum"></span> 件商品</div>
+                    </div>
+                    <img src="{:url('/public/static/home/images/js.gif','','')}" alt="">
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<script>
+    $(function() {
+        $.ajax({
+            url:"/home/index/carnum",
+            success:function(data) {
+                $("#carnum").html(data);
+            }
+        })
+    })
+</script>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>确认订单 - 三叶草官网</title>
+    <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/top.css','','')}">
+        <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/header.css','','')}">
+        <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/order.css','','')}">
+        <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/foot.css','','')}">
+        <script src="{:url('/public/static/home/js/jquery-1.8.3.min.js','','')}" type="text/javascript"></script>
+        <script src="{:url('/public/static/home/js/address.js','','')}" type="text/javascript"></script>
+        <script type="text/javascript" src="{:url('/public/static/home/js/head.js','','')}"></script>
+        <script type="text/javascript" src="{:url('/public/static/home/js/index.js','','')}"></script>
+        <script type="text/javascript" src="{:url('/public/static/home/js/order.js','','')}"></script>
+</head>
+<body bgcolor="#F7F7F7">
+    <!-- top开始 head开始 -->
+    {include file="./syc/home/view/menu/top.html"/}
+    {include file="./syc/home/view/menu/head.html"/}
+    <!-- top结束 head结束 -->
+    <!-- 中间部分开始 -->
+    <!--修改的隐藏-->
+    <div class="content_right_bottom" id="did">
+        <div style="width:15px;height:15px;float:left;margin-left:550px;margin-top:10px;"><a href="javascript:close();">×</a></div>
+            <input type="hidden" name="name" id="id" value="">
+            <div class="content_right_bottom_name">
+                <span>姓名 : </span>
+                <div class="content_right_bottom_name1">
+                    <input type="search" name="name" id="name" value="">
+                </div>
+            </div>
+            <div class="content_right_bottom_address">
+                <span>地址 : </span>
+                <div class="content_right_bottom_address1">
+                    <select id="cid" name="address">
+                        <option>-请选择-</option>
+                    </select>
+                    <br/>
+                    <input type="search" name="address" id="minaddress" value="" placeholder="">
+                </div>
+            </div>
+            <div class="content_right_bottom_phone">
+                <span>手机号码 : </span>
+                <div class="content_right_bottom_phone1">
+                    <input type="search" name="phone" id="phone" value="" placeholder="">
+                </div>
+            </div>
+            <div class="content_right_bottom_code">
+                <span>邮政编码 : </span>
+                <div class="content_right_bottom_code1">
+                    <input type="search" name="code" id="code" value="" placeholder="">
+                </div>
+            </div>
+            <div class="content_right_bottom_button">
+                <button onclick="fun()">确认修改</button>
+            </div>
+    </div>
+    <!--添加的隐藏-->
+    <div class="address_add" id="adddid">
+        <div style="width:15px;height:15px;float:left;margin-left:550px;margin-top:10px;"><a href="javascript:close1();">×</a></div>
+        <div class="address_name">
+            <span>姓名 : </span>
+            <div class="address_name_content">
+                <input type="search" id="addname" value="">
+            </div>
+        </div>
+        <div class="address_address">
+            <span>地址 : </span>
+            <div class="address_address_content">
+                <select id="cid" class="address2">
+                    <option>-请选择-</option>
+                </select>
+                <br/>
+                <input type="search" id="addminaddress" value="" placeholder="">
+            </div>
+        </div>
+        <div class="address_phone">
+            <span>手机号码 : </span>
+            <div class="address_phone_content">
+                <input type="search" id="addphone" value="" placeholder="">
+            </div>
+        </div>
+        <div class="address_code">
+            <span>邮政编码 : </span>
+            <div class="address_code_content">
+                <input type="search" id="addcode" value="" placeholder="">
+            </div>
+        </div>
+        <div class="address_submit">
+            <button onclick="append()">确认添加</button>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="content_mid">
+            <div class="content_left_one" id="jsjsjs">
+                <ul>
+                    {foreach name="list" item="vo"}
+                    <div style="position: relative;float:left;">
+                        <a href="/list/{$vo.id}.html" onmouseover="show(this)" onmouseout="hide()">
+                            <li>{$vo.name}</li>
+                        </a>
+                        {if condition="$vo.0"}
+                        <div class="category">
+                            {foreach name="vo.0" item="v"}
+                            <a href="/list/{$v.id}.html">
+                                <div class="category_con">
+                                    {$v.name}
+                                </div>
+                            </a>
+                            {/foreach}
+                        </div>
+                        {/if}
+                    </div>
+                    {/foreach}
+                </ul>
+            </div>
+            <div class="content_mid_top">
+                当前位置: 购物流程
+            </div>
+            <div class="content_mid_mid">
+                <div class="content_mid_mid_address">
+                    收货人信息<span><a href="javascript:void(0);" onclick="add()">添加地址</a></span>
+                </div>
+                <form action="{:url('/home/order/index2')}" method="post">
+                    <div class="content_mid_mid_address2">
+                        {foreach $address as $v}
+                        <div class='content_mid_mid_address3'>
+                            <label><input type='radio' name='address' value='{$v.id}' {if condition="$v.state eq 1"}checked{/if}> 收件人 : <span id="namevalue{$v.id}">{$v.name}</span> 收货地址 : <span id="addressvalue{$v.id}">{$v.address}</span> 手机号码 : <span id="phonevalue{$v.id}">{$v.phone}</span> 邮政编码 : <span id="codevalue{$v.id}">{$v.code}</span></label> &nbsp; <a href="javascript:void(0);" onclick="eid({$v.id})">修改</a>
+                        </div>
+                        {/foreach}
+                    </div>
+                    <div class="content_mid_mid_goods">
+                        商品信息
+                    </div>
+                    {if condition="$lists neq null"}
+                        {foreach $lists as $v}
+                            <div class='content_mid_mid1_con'>
+                                <input type="hidden" name="id[]" value="{$v.id}">
+                                <div class='content_mid_mid1_con_img'>
+                                    <img src='/public/uploads/{$v.picname1}' width='50'>
+                                </div>
+                                <div class='content_mid_mid1_con_con'>
+                                    <div class='content_mid_mid1_con_con_fon1'>
+                                        <a href='javascript:void(0);'>{$v.goods}</a>
+                                    </div>
+                                    <div class='content_mid_mid1_con_con_fon2'>
+                                        尺码 : {$v.size}
+                                    </div>
+                                </div>
+                                <div class='content_mid_mid1_con_pri'>
+                                    {$v.price}元 {$v.number}件
+                                </div>
+                                <div class='content_mid_mid1_con_pri2'>
+                                {$v.price*$v.number}元
+                                </div>
+                            </div>
+                        {/foreach}
+                        <div class='content_mid_mid_bottom'>
+                            <span class='content_mid_mid_bottom1'>共 {$number} 件商品</span>
+                            <div class='content_mid_mid_bottom3'>
+                            <input type="hidden" name="total" value="{$total}">
+                                应付金额: <span>￥{$total}</span> 元
+                            </div>
+                            <div class='content_mid_mid_sub' onclick="submit()">
+                                确认付款
+                            </div>
+                        </div>
+                    {else/}
+                        <div class='content_mid_mid1_con'>
+                            <input type="hidden" name="id[]" value="{$goods.id}">
+                            <input type="hidden" name="size" value="{$size}">
+                            <input type="hidden" name="number" value="{$number}">
+                            <div class='content_mid_mid1_con_img'>
+                                <img src='/uploads/{$goods.picname1}' width='50'>
+                            </div>
+                            <div class='content_mid_mid1_con_con'>
+                                <div class='content_mid_mid1_con_con_fon1'>
+                                    <a href='javascript:void(0);'>{$goods.goods}</a>
+                                </div>
+                                <div class='content_mid_mid1_con_con_fon2'>
+                                    尺码 : {$size}
+                                </div>
+                            </div>
+                            <div class='content_mid_mid1_con_pri'>
+                                {$goods.price}元 {$number}件
+                            </div>
+                            <div class='content_mid_mid1_con_pri2'>
+                            {$total}元
+                            </div>
+                        </div>
+                        <div class='content_mid_mid_bottom'>
+                            <span class='content_mid_mid_bottom1'>共 {$number} 件商品</span>
+                            <div class='content_mid_mid_bottom3'>
+                            <input type="hidden" name="total" value="{$total}">
+                                应付金额: <span>￥{$total}</span> 元
+                            </div>
+                            <div class='content_mid_mid_sub' onclick="submit()">
+                                确认付款
+                            </div>
+                        </div>
+                    {/if}
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- 中间部分结束 -->
+    <!-- foot开始 -->
+    {include file="./syc/home/view/menu/foot.html"/}
+    <!-- foot结束 -->
+</body>
+</html>

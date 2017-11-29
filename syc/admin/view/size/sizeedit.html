@@ -1,0 +1,33 @@
+
+<div class="pageContent">
+	<form method="post" action="/admin/size/edit2/navTabId/sizelist/callbackType/closeCurrent"  class="pageForm required-validate"
+		onsubmit="return validateCallback(this,dialogAjaxDone);"><?php  //窗体组件采用这个 iframeCallback(this, navTabAjaxDone); ?>
+		<div class="pageFormContent" layoutH="60">
+			<input type="hidden" name="id" value="{$lists.id}">
+			<br/><br/>
+			<dl>
+				<dt>尺码：</dt>
+				<dd>
+					<select name="sizeid" class="required">
+						<option>--请选择--</option>
+						{foreach $sizelist as $v}
+							<option value="{$v.id}" {if condition="$v.id == $lists.sid"}selected{/if} class="required" >{$v.name}</option>
+						{/foreach}
+					</select>
+				</dd>
+			</dl>
+			<dl>
+				<dt>库存：</dt>
+				<dd><input type="text" class="required" style="width:100%" name="store" value="{$lists.store}"/></dd><br/><br/><br/>
+			</dl>
+		</div>
+		
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>
+

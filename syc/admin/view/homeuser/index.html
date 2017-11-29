@@ -1,0 +1,70 @@
+<form id="pagerForm" action="/admin/homeuser/index" method="post">
+	<input type="hidden" name="pageNum" value="{$currentPage}" />
+	<input type="hidden" name="numPerPage" value="{$numPerPage}" /><!--每页显示多少条-->
+	<input type="hidden" name="_order" value="{$Think.request._order}"/>
+	<input type="hidden" name="_sort" value="{$Think.request._sort}"/>
+</form>
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" method="post">
+	<input type="hidden" name="numPerPage" value="{$numPerPage}" /><!--每页显示多少条-->
+	<div class="searchBar">
+		<table class="searchContent">
+			<tr>
+				<td>
+					<b>搜索</b> &nbsp; 账号：<input type="text" name="username" value="{$Think.post.username}" />
+				</td>
+				<td>
+					<div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="edit" href="/admin/homeuser/edit/id/{$Think.config.template.tpl_begin}item_id{$Think.config.template.tpl_end}"  width="550" height="380" target="dialog"><span>修改状态</span></a></li>
+			<li class="line">line</li>
+			<li><a class="icon"  href="javascript:navTabPageBreak()"><span>刷新</span></a></li>
+			<!--<li><a class="icon" href="demo/common/dwz-team.xls" target="dwzExport" targetType="navTab" title="实要导出这些记录吗?"><span>导出EXCEL</span></a></li>-->
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="112">
+		<thead>
+			<tr align="center">
+				<th width="40">ID</th>
+				<th width="150">账号</th>
+				<th width="150">头像</th>
+				<th width="150">状态</th>
+				<th width="150">注册时间</th>
+			</tr>
+		</thead>
+		<tbody>
+			{volist name="list" id="vo"}
+				<tr align="center" target="item_id" rel="{$vo.id}">
+					<td>{$vo.id}</td>
+					<td>{$vo.username}</td>
+					<td><img src="/public/headpic/{$vo.headpic}" width="30" height="30"></td>
+					<td>{if condition="$vo.state == 1"}普通会员{else/}禁用会员{/if}</td>
+					<td>{$vo.addtime|date='Y-m-d',###}</td>
+				</tr>
+			{/volist}
+		</tbody>
+	</table>
+	<div class="panelBar">
+		<div class="pages">
+			<span>显示</span>
+			<select class="combox" name="numPerPage" onchange="navTabPageBreak({$Think.config.template.tpl_begin}numPerPage:this.value{$Think.config.template.tpl_end})">
+				<option value="5" {if condition="$numPerPage eq 5"}selected{/if}>5</option>
+				<option value="10" {if condition="$numPerPage eq 10"}selected{/if}>10</option>
+				<option value="15" {if condition="$numPerPage eq 15"}selected{/if}>15</option>
+				<option value="20" {if condition="$numPerPage eq 20"}selected{/if}>20</option>
+				<option value="25" {if condition="$numPerPage eq 25"}selected{/if}>25</option>
+				<option value="30" {if condition="$numPerPage eq 30"}selected{/if}>30</option>
+			</select>
+			<span>共{$totalCount}条</span>
+		</div>
+		<div class="pagination" targetType="navTab" totalCount="{$totalCount}" numPerPage="{$numPerPage}" pageNumShown="" currentPage="{$currentPage}"></div>
+	</div>
+</div>

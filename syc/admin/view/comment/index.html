@@ -1,0 +1,64 @@
+<form id="pagerForm" action="/admin/comment/index" method="post">
+	<input type="hidden" name="pageNum" value="{$currentPage}" />
+	<input type="hidden" name="numPerPage" value="{$numPerPage}" /><!--每页显示多少条-->
+	<input type="hidden" name="_order" value="{$Think.request._order}"/>
+	<input type="hidden" name="_sort" value="{$Think.request._sort}"/>
+</form>
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" method="post">
+	<input type="hidden" name="numPerPage" value="{$numPerPage}" /><!--每页显示多少条-->
+	<div class="searchBar">
+		<table class="searchContent">
+
+		</table>
+	</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="icon"  href="javascript:navTabPageBreak()"><span>刷新</span></a></li>
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="112">
+		<thead>
+			<tr align="center">
+				<th width="40">ID</th>
+				<th width="100">用户账号</th>
+				<th width="100">评论内容</th>
+				<th width="100">评论时间</th>
+				<th width="100">回复内容</th>
+				<th width="100">回复时间</th>
+				<th width="100">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			{volist name="list" id="vo"}
+				<tr target="item_id" rel="{$vo.id}" align="center">
+					<td>{$vo.id}</td>
+					<td>{$vo.username}</td>
+					<td>{$vo.comment}</td>
+					<td>{$vo.addtime1|date="Y-m-d H:i:s",###}</td>
+					<td>{if condition="$vo.reply"}{$vo.reply}{else/}未回复{/if}</td>
+					<td>{if condition="$vo.addtime2"}{$vo.addtime2|date="Y-m-d H:i:s",###}{else/}未回复{/if}</td>
+					<td>{if condition="$vo.reply"}<a href="#">已回复</a>{else/}<a href="{:url('/admin/comment/reply',['id'=>$vo.id])}" target="dialog">回复评论{/if}</td>
+				</tr>
+			{/volist}
+		</tbody>
+	</table>
+	<div class="panelBar">
+		<div class="pages">
+			<span>显示</span>
+			<select class="combox" name="numPerPage" onchange="navTabPageBreak({$Think.config.template.tpl_begin}numPerPage:this.value{$Think.config.template.tpl_end})">
+				<option value="5" {if condition="$numPerPage eq 5"}selected{/if}>5</option>
+				<option value="10" {if condition="$numPerPage eq 10"}selected{/if}>10</option>
+				<option value="15" {if condition="$numPerPage eq 15"}selected{/if}>15</option>
+				<option value="20" {if condition="$numPerPage eq 20"}selected{/if}>20</option>
+				<option value="25" {if condition="$numPerPage eq 25"}selected{/if}>25</option>
+				<option value="30" {if condition="$numPerPage eq 30"}selected{/if}>30</option>
+			</select>
+			<span>共{$totalCount}条</span>
+		</div>
+		<div class="pagination" targetType="navTab" totalCount="{$totalCount}" numPerPage="{$numPerPage}" pageNumShown="" currentPage="{$currentPage}"></div>
+	</div>
+</div>

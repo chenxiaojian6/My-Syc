@@ -1,0 +1,81 @@
+<div class="pageContent">
+	<form method="post" action="/admin/goods/update/navTabId/goodslist/callbackType/closeCurrent" enctype="multipart/form-data"  class="pageForm required-validate"
+		  onsubmit="return iframeCallback(this,dialogAjaxDone);"><?php  //窗体组件采用这个 iframeCallback(this, navTabAjaxDone); ?>
+		<input type="hidden" name="id" value="{$vo.id}"/>
+		<div class="pageFormContent" layoutH="60">
+			<dl>
+				<dt>类别：</dt>
+				<dd>
+					<select name="typeid" class="required">
+						<option>--请选择--</option>
+						{foreach $type as $v}
+						<option value="{$v.id}" class="required" {if condition="$vo.typeid eq $v.id"}selected{/if} {if condition="$v.disabled eq 0"}disabled{/if}>{$v.name}</option>
+						{/foreach}
+					</select>
+				</dd><br/><br/><br/>
+			</dl><br/><br/><br/>
+			<dl>
+				<dt>商品名称：</dt>
+				<dd><input type="text" class="required" style="width:100%" name="goods" value="{$vo.goods}"/></dd><br/><br/><br/>
+			</dl><br/><br/><br/>
+			<dl>
+				<dt>生产厂家：</dt>
+				<dd><input type="text" class="required" style="width:100%" name="company" value="{$vo.company}"/></dd>
+			</dl><br/><br/><br/>
+			<dl>
+				<dt>价格：</dt>
+				<dd><input type="text" class="required" style="width:100%" name="price" value="{$vo.price}"/></dd>
+			</dl><br/><br/><br/>
+			<dl>
+				<dt>图片1：</dt>
+				<dd><img src="/public/uploads/{$vo.picname1}" width="50"></dd>
+			</dl><br/><br/><br/><br/><br/><br/>
+			<dl>
+				<dt>新图片1：</dt>
+				<dd><input type="file" name="picname1"></dd>
+			</dl><br/><br/><br/>
+			<dl>
+				<dt>原图片2：</dt>
+				<dd><img src="/public/uploads/{$vo.picname2}" width="50"></dd>
+			</dl><br/><br/><br/><br/><br/><br/>
+			<dl>
+				<dt>新图片2：</dt>
+				<dd><input type="file" name="picname2"></dd>
+			</dl><br/><br/><br/>
+			<dl>
+				<dt>原图片3：</dt>
+				<dd><img src="/public/uploads/{$vo.picname3}" width="50"></dd>
+			</dl><br/><br/><br/><br/><br/><br/>
+			<dl>
+				<dt>新图片3：</dt>
+				<dd><input type="file" name="picname3"></dd>
+			</dl><br/><br/><br/>
+			<dl>
+				<dt>状态：</dt>
+				<dd>
+					<select name="state" class="required">
+						<option>--请选择--</option>
+						<option value="1" {if condition="$vo.state eq 1"}selected{/if}>新添加</option>
+						<option value="2" {if condition="$vo.state eq 2"}selected{/if}>在售</option>
+						<option value="3" {if condition="$vo.state eq 3"}selected{/if}>下架</option>
+					</select>
+				</dd>
+			</dl><br/><br/><br/>
+			<dl>
+				<dt>销售量：</dt>
+				<dd><input type="text" class="required" style="width:100%" name="num" value="{$vo.num}"/></dd>
+			</dl><br/><br/><br/>
+			<dl>
+				<dt>点击量：</dt>
+				<dd><input type="text" class="required" style="width:100%" name="clicknum" value="{$vo.clicknum}"/></dd>
+			</dl><br/><br/><br/>
+		</div>
+
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>

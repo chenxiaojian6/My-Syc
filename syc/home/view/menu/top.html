@@ -1,0 +1,40 @@
+<div class="top">
+	<div class="top_con">
+		<div class="tot_con_one">
+			{if condition="$Think.session.homeuser"}
+				{if condition="$Think.session.homeuser->wb"}
+					<span class='top_con_oneuser'>您好 , {$Think.session.homeuser->wbname} , 欢迎您回来 ! &nbsp; <a href="{:url('/per')}">用户中心</a> &nbsp; <a href="{:url('/home/login/logout')}">退出</a></span>
+				{elseif condition="$Think.session.homeuser->qq"/}
+					<span class='top_con_oneuser'>您好 , {$Think.session.homeuser->qqname} , 欢迎您回来 ! &nbsp; <a href="{:url('/per')}">用户中心</a> &nbsp; <a href="{:url('/home/login/logout')}">退出</a></span>
+				{else/}
+					<span class='top_con_oneuser'>您好 , {$Think.session.homeuser->username} , 欢迎您回来 ! &nbsp; <a href="{:url('/per')}">用户中心</a> &nbsp; <a href="{:url('/home/login/logout')}">退出</a></span>
+				{/if}
+			{else/}
+				<div class='top_con_one1'>欢迎您来到三叶草商城！</div>
+				<a href="{:url('/login')}"title='登录'>
+					<div class='top_con_oned'>
+						<span class='top_con_onedimg'>
+							<img src="{:url('/public/static/home/images/top_denglu.png','','')}" alt='登录'>
+						</span>
+						<span class='top_con_onedl'>[登录]</span>
+					</div>
+				</a>
+				<a href="{:url('/reg')}" title='注册'>
+					<div class='top_con_onez'>
+						<span class='top_con_onezimg'>
+							<img src="{:url('/public/static/home/images/top_zhuce.png','','')}" alt='注册'>
+						</span>
+						<span class='top_con_onezc'>[免费注册]</span>
+					</div>
+				</a>
+			{/if}
+		</div>
+		<div class="top_nav">
+			<ul>
+				<li class="top_nav_wo"><a href="" name='a'>我的三叶草</a></li>
+				<li class="top_nav_xin">新手指南</li>
+				<li class="top_nav_guan">关注三叶草</li>
+			</ul>
+		</div>
+	</div>
+</div>

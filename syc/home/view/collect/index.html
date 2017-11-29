@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>用户中心 - 三叶草官网</title>
+        <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/top.css','','')}">
+        <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/header.css','','')}">
+        <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/address.css','','')}">
+        <link rel="stylesheet" type="text/css" href="{:url('/public/static/home/css/foot.css','','')}">
+        <script src="{:url('/public/static/home/js/jquery-1.8.3.min.js','','')}" type="text/javascript"></script>
+        <script type="text/javascript" src="{:url('/public/static/home/js/head.js','','')}"></script>
+        <script type="text/javascript" src="{:url('/public/static/home/js/index.js','','')}"></script>
+    </head>
+    <body bgcolor="#F7F7F7">
+        <!-- top开始 head开始 -->
+        {include file="./syc/home/view/menu/top.html"/}
+        {include file="./syc/home/view/menu/head.html"/}
+        <!-- top结束 head结束 -->
+        <div class="mid">
+            <div class="content">
+                <div class="content_left_one" id="jsjsjs">
+                    <ul>
+                        {foreach name="list" item="vo"}
+                        <div style="position: relative;float:left;">
+                            <a href="/list/{$vo.id}.html" onmouseover="show(this)" onmouseout="hide()">
+                                <li>{$vo.name}</li>
+                            </a>
+                            {if condition="$vo.0"}
+                            <div class="category">
+                                {foreach name="vo.0" item="v"}
+                                <a href="/list/{$v.id}.html">
+                                    <div class="category_con">
+                                        {$v.name}
+                                    </div>
+                                </a>
+                                {/foreach}
+                            </div>
+                            {/if}
+                        </div>
+                        {/foreach}
+                    </ul>
+                </div>
+                <div class="content_left">
+                    <div class="content_left_top"></div>
+                    <div class="content_left_mid">
+                        <ul>
+                            <a href="{:url('/per')}">
+                                <li><div class="content_left_mid1">我的三叶草中心</div></li>
+                            </a>
+                            <a href="{:url('/orders')}">
+                                <li><div class="content_left_mid2">我的订单</div></li>
+                            </a>
+                            <a href="{:url('/data')}">
+                                <li><div class="content_left_mid3">个人资料</div></li>
+                            </a>
+                            <a href="{:url('/address')}">
+                                <li><div class="content_left_mid4">收货地址</div></li>
+                            </a>
+                            <a href="{:url('/pass')}">
+                                <li><div class="content_left_mid5">修改密码</div></li>
+                            </a>
+                            <a href="{:url('/collect')}">
+                                <li class="content_left_mid_bot"><div class="content_left_mid7">我的收藏</div></li>
+                            </a>
+                            <a href="">
+                                <li><div class="content_left_mid6">积分&优惠券</div></li>
+                            </a>
+                        </ul>
+                    </div>
+                    <a href="{:url('/index')}">
+                        <div class="content_left_bottom">
+                            继续购买商品
+                        </div>
+                    </a>
+                </div>
+                <div class="content_right">
+                    <div class="content_right_top">
+                        <div class="content_right_top1">我的收藏</div>
+                    </div>
+                    <div class="content_right_bottom">
+                        <div class="content_right_bottom1">
+                            <table>
+                                <tr class="content_right_bottom1_tr" align="center">
+                                    <td width="465">商品名称</td>
+                                    <td width="159">商品图片</td>
+                                    <td width="159">商品价格</td>
+                                    <td width="159">操作</td>
+                                </tr>
+                                {foreach $link as $v}
+                                    <tr align='center'>
+                                        <td width='465'>{$v.goods}</td>
+                                        <td width='159'><img src="/public/uploads/{$v.picname}" width="50px"></td>
+                                        <td width='159'>{$v.price}</td>
+                                        <td width='159'>
+                                            <a href='/detail/{$v.goodid}.html'>查看</a>
+                                            <a href='/del_collect/{$v.id}.html'>删除</a>
+                                        </td>
+                                    </tr>
+                                {/foreach}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- foot开始 -->
+        {include file="./syc/home/view/menu/foot.html"/}
+        <!-- foot结束 -->
+    </body>
+</html>
